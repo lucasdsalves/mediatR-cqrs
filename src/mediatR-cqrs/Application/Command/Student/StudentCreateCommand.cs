@@ -1,6 +1,6 @@
 ﻿using MediatR;
 
-namespace mediatR_cqrs.Domain.Student.Command
+namespace mediatR_cqrs.Application.Command.Student
 {
     public class StudentCreateCommand : IRequest<string>
     {

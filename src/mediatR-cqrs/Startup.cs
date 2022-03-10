@@ -1,5 +1,6 @@
 using MediatR;
-using mediatR_cqrs.Domain.Infrastructure;
+using mediatR_cqrs.Application.Services;
+using mediatR_cqrs.Infrastructure;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -26,10 +27,14 @@ namespace mediatR_cqrs
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "mediatR_cqrs", Version = "v1" });
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "MediatR + CQRS concepts", Version = "v1" });
             });
 
+            #region DI
             services.AddSingleton<IStudentRepository, StudentRepository>();
+            services.AddSingleton<IStudentService, StudentService>();
+            #endregion
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -1,12 +1,12 @@
 ﻿using MediatR;
-using mediatR_cqrs.Domain.Infrastructure;
+using mediatR_cqrs.Application.Command.Student;
+using mediatR_cqrs.Domain.Command.Student;
 using mediatR_cqrs.Domain.Notifications;
-using mediatR_cqrs.Domain.Student.Command;
-using mediatR_cqrs.Domain.Student.Entity;
+using mediatR_cqrs.Infrastructure;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace mediatR_cqrs.Domain.Student.Handler
+namespace mediatR_cqrs.Application.CommandHandler.Student
 {
     public class StudentCommandHandler : IRequestHandler<StudentCreateCommand, string>,
          IRequestHandler<StudentUpdateCommand, string>,
@@ -23,7 +23,7 @@ namespace mediatR_cqrs.Domain.Student.Handler
 
         public async Task<string> Handle(StudentCreateCommand request, CancellationToken cancellationToken)
         {
-            var student = new StudentEntity(request.Id, request.FirstName, request.LastName, request.Email);
+            var student = new Domain.Aggregations.Student(request.Id, request.FirstName, request.LastName, request.Email);
 
             await _studentRepository.Save(student);
 
@@ -57,7 +57,7 @@ namespace mediatR_cqrs.Domain.Student.Handler
 
         public async Task<string> Handle(StudentUpdateCommand request, CancellationToken cancellationToken)
         {
-            var student = new StudentEntity(request.Id, request.FirstName, request.LastName, request.Email);
+            var student = new Domain.Aggregations.Student(request.Id, request.FirstName, request.LastName, request.Email);
 
             await _studentRepository.Update(request.Id, student);
 

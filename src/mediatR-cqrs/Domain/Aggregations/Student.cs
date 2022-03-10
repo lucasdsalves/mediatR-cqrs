@@ -1,8 +1,10 @@
-﻿namespace mediatR_cqrs.Domain.Student.Entity
+﻿namespace mediatR_cqrs.Domain.Aggregations
 {
-    public class StudentEntity
+    public class Student
     {
-        public StudentEntity(int id, string firstName, string lastName, string email)
+        public Student() {}
+
+        public Student(int id, string firstName, string lastName, string email)
         {
             Id = id;
             FirstName = firstName;
